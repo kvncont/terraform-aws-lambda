@@ -1,6 +1,4 @@
-data "aws_caller_identity" "current" {}
-
-resource "aws_iam_role" "lambda_execution_role" {
+resource "aws_iam_role" "lambda" {
   name               = local.role_name
   assume_role_policy = jsonencode({
     Version : "2012-10-17"
@@ -16,7 +14,7 @@ resource "aws_iam_role" "lambda_execution_role" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "lambda_policy_attachment" {
+resource "aws_iam_role_policy_attachment" "lambda" {
   role       = aws_iam_role.lambda_execution_role.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }

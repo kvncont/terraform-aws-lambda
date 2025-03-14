@@ -4,7 +4,7 @@ data "archive_file" "lambda" {
   output_path = "lambda_function.zip"
 }
 
-resource "aws_lambda_function" "app" {
+resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = var.function_name
   role          = aws_iam_role.lambda_execution_role.arn
@@ -21,7 +21,7 @@ resource "aws_lambda_function" "app" {
   }
 }
 
-resource "aws_lambda_function_url" "app" {
+resource "aws_lambda_function_url" "lambda" {
   function_name      = aws_lambda_function.app.function_name
   authorization_type = "NONE"
 }

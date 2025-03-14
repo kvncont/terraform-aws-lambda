@@ -6,12 +6,11 @@ variable "region" {
 
 variable "function_name" {
   type = string
-  description = ""
-  default = "my-app-1"
+  description = "Name of the Lambda function"
 }
 
 variable "function_handler" {
   type = string
-  description = ""
+  description = "Entry point for the Lambda function handler"
   default = "lambda_function.lambda_handler"
 }
