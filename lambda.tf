@@ -7,7 +7,7 @@ data "archive_file" "lambda" {
 resource "aws_lambda_function" "lambda" {
   filename      = "lambda_function.zip"
   function_name = var.function_name
-  role          = aws_iam_role.lambda_execution_role.arn
+  role          = aws_iam_role.lambda.arn
   handler       = var.function_handler
 
   source_code_hash = data.archive_file.lambda.output_base64sha256
@@ -22,6 +22,6 @@ resource "aws_lambda_function" "lambda" {
 }
 
 resource "aws_lambda_function_url" "lambda" {
-  function_name      = aws_lambda_function.app.function_name
+  function_name      = aws_lambda_function.lambda.function_name
   authorization_type = "NONE"
 }
