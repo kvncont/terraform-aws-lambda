@@ -4,6 +4,11 @@ variable "region" {
   default = "us-east-1"
 }
 
+variable "assume_role_arn" {
+  type = string
+  description = "ARN Role to assume"
+}
+
 variable "function_name" {
   type = string
   description = "Name of the Lambda function"
