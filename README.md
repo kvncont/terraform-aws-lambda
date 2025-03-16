@@ -41,3 +41,4 @@ No modules.
 | <a name="output_function_runtime"></a> [function\_runtime](#output\_function\_runtime) | Runtime environment for the Lambda function |
 | <a name="output_function_url"></a> [function\_url](#output\_function\_url) | Lambda function URL |
 | <a name="output_lambda_role_arn"></a> [lambda\_role\_arn](#output\_lambda\_role\_arn) | ARN Role for the Lambda function |
+| <a name="output_lambda_role_name"></a> [lambda\_role\_name](#output\_lambda\_role\_name) | Role name for the Lambda function |
