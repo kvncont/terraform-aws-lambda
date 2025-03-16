@@ -1,5 +1,5 @@
 {
-	"name": "Lambda Python Vanilla",
+	"name": "Lambda Module",
 	"image": "mcr.microsoft.com/devcontainers/base:jammy",
 	"features": {
 		"ghcr.io/devcontainers/features/terraform:1": {},
