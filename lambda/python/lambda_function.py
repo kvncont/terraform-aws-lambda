@@ -1,6 +1,6 @@
 import json
 
-def lambda_handler(event, context):
+def handler(event, context):
     response_body = {
         "message": "Hello from Terraform!",
         "event": event

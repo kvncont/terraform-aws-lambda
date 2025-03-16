@@ -1,5 +1,5 @@
-resource "aws_iam_role" "lambda" {
-  name               = local.role_name
+resource "aws_iam_role" "app" {
+  name = local.app_role_name
   assume_role_policy = jsonencode({
     Version : "2012-10-17"
     Statement : [
@@ -14,7 +14,7 @@ resource "aws_iam_role" "lambda" {
   })
 }
 
-resource "aws_iam_role_policy_attachment" "lambda" {
-  role       = aws_iam_role.lambda.name
+resource "aws_iam_role_policy_attachment" "app" {
+  role       = aws_iam_role.app.name
   policy_arn = "arn:aws:iam::aws:policy/service-role/AWSLambdaBasicExecutionRole"
 }

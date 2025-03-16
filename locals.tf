@@ -1,5 +1,7 @@
 locals {
-  lambda_name = replace(title(var.function_name),"-","")
-  role_name = "LambdaExecutionRoleFor${local.lambda_name}"
-  policy_name = "CustomPolicyFor${local.lambda_name}"
+  app_name         = replace(title(var.waypoint_application), "-", "")
+  app_role_name    = "LambdaExecutionRoleFor${local.app_name}"
+  function_dir     = can(regex("python", var.runtime)) ? "python" : "nodejs"
+  function_file    = local.function_dir == "python" ? "lambda_function.py" : "index.mjs"
+  function_handler = local.function_dir == "python" ? "lambda_function.handler" : "index.handler"
 }
