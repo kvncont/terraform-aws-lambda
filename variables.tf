@@ -12,8 +12,8 @@ variable "waypoint_application" {
   type        = string
   description = "Name of the application"
   validation {
-    condition     = can(regex("^[a-z][a-z0-9-]*$", var.waypoint_application))
-    error_message = "The waypoint_application variable must start with a lowercase letter and can only contain lowercase letters, numbers, and hyphens (-)."
+    condition     = can(regex("^[a-z][a-z0-9-]*-(poc|dev|test|qa|stg|pre|pro)$", var.waypoint_application))
+    error_message = "The waypoint_application variable must start with a lowercase letter, can only contain lowercase letters, numbers, and hyphens (-), and must end with one of the following suffixes: poc, dev, test, qa, stg, pre, pro."
   }
 }
 
