@@ -20,9 +20,9 @@ variables {
     managed_by  = "terraform"
     owner       = "platform-team"
   }
-  region          = "us-east-1"
-  function_name   = "test-dev"
-  runtime         = "python3.13"
+  region        = "us-east-1"
+  function_name = "test-dev"
+  runtime       = "python3.13"
 }
 
 run "defaults" {
