@@ -5,14 +5,45 @@ data "archive_file" "artifact" {
 }
 
 resource "aws_lambda_function" "app" {
-  filename         = "lambda_function.zip"
-  function_name    = var.waypoint_application
-  role             = aws_iam_role.app.arn
-  runtime          = var.runtime
-  handler          = local.function_handler
-  source_code_hash = data.archive_file.artifact.output_base64sha256
+  depends_on = [
+    aws_iam_role_policy_attachment.app,
+    aws_iam_role_policy_attachment.vpc,
+    aws_iam_role_policy.kms
+  ]
+
+  filename           = "lambda_function.zip"
+  function_name      = var.function_name
+  role               = aws_iam_role.app.arn
+  runtime            = var.runtime
+  handler            = local.function_handler
+  source_code_hash   = data.archive_file.artifact.output_base64sha256
+  timeout            = var.timeout
+  memory_size        = var.memory_size
+  layers             = var.layers
+  tags               = var.tags
+  source_kms_key_arn = var.source_kms_key_arn
+  kms_key_arn        = var.kms_key_arn
+
+  dynamic "vpc_config" {
+    for_each = var.vpc_config == null ? [] : [var.vpc_config]
+
+    content {
+      subnet_ids = vpc_config.value.subnet_ids
+      security_group_ids = concat(
+        tolist(vpc_config.value.security_group_ids),
+        aws_security_group.lambda[*].id
+      )
+    }
+  }
 
   lifecycle {
+    precondition {
+      condition = (
+        length(var.security_group_ingress_rules) == 0 && length(var.security_group_egress_rules) == 0
+      ) || (var.vpc_config == null ? false : var.vpc_config.create_security_group)
+      error_message = "Security group rules require vpc_config with create_security_group enabled."
+    }
+
     ignore_changes = [
       handler,
       filename,
