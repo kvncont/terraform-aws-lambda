@@ -6,7 +6,7 @@ variable "region" {
 
 variable "tags" {
   description = "Required tags for the example resources"
-  type = map(string)
+  type        = map(string)
   default = {
     environment = "dev"
     managed_by  = "terraform"
