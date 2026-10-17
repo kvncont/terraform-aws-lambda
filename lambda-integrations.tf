@@ -3,7 +3,7 @@ resource "aws_lambda_permission" "this" {
 
   statement_id   = each.value.statement_id
   action         = "lambda:InvokeFunction"
-  function_name  = aws_lambda_function.app.function_name
+  function_name  = aws_lambda_function.this.function_name
   principal      = each.value.principal
   source_arn     = each.value.source_arn
   source_account = each.value.source_account
@@ -14,9 +14,8 @@ resource "aws_lambda_event_source_mapping" "dynamodb_stream" {
   tags     = var.tags
 
   event_source_arn                   = each.value.event_source_arn
-  function_name                      = aws_lambda_function.app.arn
+  function_name                      = aws_lambda_function.this.arn
   starting_position                  = each.value.starting_position
-  starting_position_timestamp        = each.value.starting_position_timestamp
   batch_size                         = each.value.batch_size
   enabled                            = each.value.enabled
   maximum_batching_window_in_seconds = each.value.maximum_batching_window_in_seconds
@@ -33,7 +32,7 @@ resource "aws_lambda_event_source_mapping" "kinesis_stream" {
   tags     = var.tags
 
   event_source_arn                   = each.value.event_source_arn
-  function_name                      = aws_lambda_function.app.arn
+  function_name                      = aws_lambda_function.this.arn
   starting_position                  = each.value.starting_position
   starting_position_timestamp        = each.value.starting_position_timestamp
   batch_size                         = each.value.batch_size
@@ -52,7 +51,7 @@ resource "aws_lambda_event_source_mapping" "sqs_queue" {
   tags     = var.tags
 
   event_source_arn                   = each.value.event_source_arn
-  function_name                      = aws_lambda_function.app.arn
+  function_name                      = aws_lambda_function.this.arn
   batch_size                         = each.value.batch_size
   enabled                            = each.value.enabled
   maximum_batching_window_in_seconds = each.value.maximum_batching_window_in_seconds
@@ -87,7 +86,7 @@ resource "aws_lambda_event_source_mapping" "amazon_msk" {
   tags     = var.tags
 
   event_source_arn                   = each.value.event_source_arn
-  function_name                      = aws_lambda_function.app.arn
+  function_name                      = aws_lambda_function.this.arn
   topics                             = each.value.topics
   batch_size                         = each.value.batch_size
   enabled                            = each.value.enabled

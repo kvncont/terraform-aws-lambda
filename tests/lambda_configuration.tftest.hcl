@@ -31,10 +31,10 @@ run "defaults" {
 
   assert {
     condition = (
-      aws_lambda_function.app.timeout == 3 &&
-      aws_lambda_function.app.memory_size == 128 &&
-      length(aws_lambda_function.app.layers) == 0 &&
-      length(aws_lambda_function.app.vpc_config) == 0 &&
+      aws_lambda_function.this.timeout == 3 &&
+      aws_lambda_function.this.memory_size == 128 &&
+      length(aws_lambda_function.this.layers) == 0 &&
+      length(aws_lambda_function.this.vpc_config) == 0 &&
       length(aws_security_group.lambda) == 0 &&
       length(aws_iam_role_policy_attachment.vpc) == 0 &&
       length(aws_cloudwatch_metric_alarm.lambda) == 0
@@ -76,10 +76,10 @@ run "managed_vpc_and_alarms" {
 
   assert {
     condition = (
-      aws_lambda_function.app.timeout == 30 &&
-      aws_lambda_function.app.memory_size == 512 &&
-      length(aws_lambda_function.app.layers) == 1 &&
-      contains(aws_lambda_function.app.vpc_config[0].security_group_ids, aws_security_group.lambda[0].id) &&
+      aws_lambda_function.this.timeout == 30 &&
+      aws_lambda_function.this.memory_size == 512 &&
+      length(aws_lambda_function.this.layers) == 1 &&
+      contains(aws_lambda_function.this.vpc_config[0].security_group_ids, aws_security_group.lambda[0].id) &&
       length(aws_iam_role_policy_attachment.vpc) == 1 &&
       length(aws_vpc_security_group_ingress_rule.lambda) == 1 &&
       length(aws_vpc_security_group_egress_rule.lambda) == 1
@@ -114,8 +114,8 @@ run "separate_kms_keys" {
 
   assert {
     condition = (
-      aws_lambda_function.app.source_kms_key_arn == var.source_kms_key_arn &&
-      aws_lambda_function.app.kms_key_arn == var.kms_key_arn &&
+      aws_lambda_function.this.source_kms_key_arn == var.source_kms_key_arn &&
+      aws_lambda_function.this.kms_key_arn == var.kms_key_arn &&
       length(aws_iam_role_policy.kms) == 1 &&
       toset(jsondecode(aws_iam_role_policy.kms[0].policy).Statement[0].Resource) == toset([var.source_kms_key_arn, var.kms_key_arn])
     )
@@ -197,7 +197,7 @@ run "existing_security_groups" {
   assert {
     condition = (
       length(aws_security_group.lambda) == 0 &&
-      contains(aws_lambda_function.app.vpc_config[0].security_group_ids, "sg-12345678") &&
+      contains(aws_lambda_function.this.vpc_config[0].security_group_ids, "sg-12345678") &&
       length(aws_iam_role_policy_attachment.vpc) == 1
     )
     error_message = "Existing security groups must be attached without creating a new group."
@@ -252,5 +252,5 @@ run "rules_without_managed_group" {
       }
     }
   }
-  expect_failures = [aws_lambda_function.app]
+  expect_failures = [aws_lambda_function.this]
 }

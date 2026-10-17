@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "this" {
-  name              = "/aws/lambda/${aws_lambda_function.app.function_name}"
+  name              = "/aws/lambda/${var.function_name}"
   retention_in_days = var.log_retention_in_days
   tags              = var.tags
 }
@@ -36,6 +36,6 @@ resource "aws_cloudwatch_metric_alarm" "lambda" {
   }
 
   dimensions = {
-    FunctionName = aws_lambda_function.app.function_name
+    FunctionName = aws_lambda_function.this.function_name
   }
 }

@@ -4,16 +4,17 @@ data "archive_file" "artifact" {
   output_path = "lambda_function.zip"
 }
 
-resource "aws_lambda_function" "app" {
+resource "aws_lambda_function" "this" {
   depends_on = [
-    aws_iam_role_policy_attachment.app,
+    aws_cloudwatch_log_group.this,
+    aws_iam_role_policy_attachment.this,
     aws_iam_role_policy_attachment.vpc,
     aws_iam_role_policy.kms
   ]
 
   filename           = "lambda_function.zip"
   function_name      = var.function_name
-  role               = aws_iam_role.app.arn
+  role               = aws_iam_role.this.arn
   runtime            = var.runtime
   handler            = local.function_handler
   source_code_hash   = data.archive_file.artifact.output_base64sha256
@@ -52,7 +53,7 @@ resource "aws_lambda_function" "app" {
   }
 }
 
-resource "aws_lambda_function_url" "app" {
-  function_name      = aws_lambda_function.app.function_name
+resource "aws_lambda_function_url" "this" {
+  function_name      = aws_lambda_function.this.function_name
   authorization_type = "NONE"
 }

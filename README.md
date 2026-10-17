@@ -51,14 +51,14 @@ No modules.
 
 | Name | Type |
 |------|------|
-| [aws_iam_role.app](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/iam_role) | resource |
-| [aws_iam_role_policy_attachment.app](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/iam_role_policy_attachment) | resource |
+| [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/iam_role) | resource |
+| [aws_iam_role_policy_attachment.this](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/iam_role_policy_attachment) | resource |
 | [aws_lambda_event_source_mapping.amazon_msk](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_event_source_mapping) | resource |
 | [aws_lambda_event_source_mapping.dynamodb_stream](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_event_source_mapping) | resource |
 | [aws_lambda_event_source_mapping.kinesis_stream](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_event_source_mapping) | resource |
 | [aws_lambda_event_source_mapping.sqs_queue](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_event_source_mapping) | resource |
-| [aws_lambda_function.app](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_function) | resource |
-| [aws_lambda_function_url.app](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_function_url) | resource |
+| [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_function) | resource |
+| [aws_lambda_function_url.this](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_function_url) | resource |
 | [aws_lambda_permission.this](https://registry.terraform.io/providers/hashicorp/aws/5.91.0/docs/resources/lambda_permission) | resource |
 | [archive_file.artifact](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 

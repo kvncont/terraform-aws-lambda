@@ -1,7 +1,7 @@
 resource "aws_security_group" "lambda" {
   count = var.vpc_config == null ? 0 : (var.vpc_config.create_security_group ? 1 : 0)
 
-  name_prefix = "${var.function_name}-"
+  name_prefix = "lambda-${var.function_name}-"
   description = "Network access for ${var.function_name} Lambda"
   vpc_id      = var.vpc_config.vpc_id
   tags        = var.tags
