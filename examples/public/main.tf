@@ -24,4 +24,11 @@ module "lambda" {
   function_name = "lambda-public-example"
   runtime       = "python3.13"
   tags          = var.tags
+
+  # Opt in only after replacing these placeholders with ARNs of approved
+  # customer-managed policies that exist in your account.
+  # extra_policies = {
+  #   ddb_orders_read      = "arn:aws:iam::123456789012:policy/platform/approved/pol-ddb-orders-read"
+  #   elc_products_connect = "arn:aws:iam::123456789012:policy/platform/approved/pol-elc-products-connect"
+  # }
 }

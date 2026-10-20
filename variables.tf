@@ -300,3 +300,9 @@ variable "amazon_msk_event_source_mappings" {
   }))
   default = {}
 }
+
+variable "extra_policies" {
+  description = "Extra IAM policies to attach to the Lambda function"
+  type        = map(string)
+  default     = {}
+}

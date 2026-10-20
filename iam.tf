@@ -41,3 +41,16 @@ resource "aws_iam_role_policy" "kms" {
     }]
   })
 }
+
+resource "aws_iam_role_policy_attachment" "extra" {
+  for_each   = var.extra_policies
+  role       = aws_iam_role.this.name
+  policy_arn = each.value
+
+  lifecycle {
+    precondition {
+      condition     = can(regex("^arn:aws:iam::[0-9]{12}:policy/platform/approved/", each.value))
+      error_message = "The policy must be under /platform/approved/."
+    }
+  }
+}
