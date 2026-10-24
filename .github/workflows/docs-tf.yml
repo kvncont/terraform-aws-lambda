@@ -1,0 +1,22 @@
+name: Generate Terraform Docs
+on:
+  - pull_request
+
+jobs:
+  docs:
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v7
+      with:
+        ref: ${{ github.event.pull_request.head.ref }}
+
+    - name: Render terraform docs and push changes back to PR
+      uses: terraform-docs/gh-actions@main
+      with:
+        working-dir: .
+        output-file: README.md
+        output-method: replace
+        git-push: "true"
+        git-commit-message: "docs: update terraform docs"
