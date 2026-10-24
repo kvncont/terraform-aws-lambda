@@ -7,7 +7,7 @@ resource "aws_cloudwatch_log_group" "this" {
 resource "aws_cloudwatch_metric_alarm" "lambda" {
   for_each = { for name, alarm in var.cloudwatch_alarms : name => alarm if var.enable_cloudwatch_alarms && alarm.enabled }
 
-  alarm_name                = "${var.function_name}-${each.key}"
+  alarm_name                = "cloudwatch-alarm-lambda-${var.function_name}-${each.key}"
   alarm_description         = "Lambda ${each.value.metric_name}: ${each.value.comparison_operator}, period ${each.value.period}s"
   namespace                 = "AWS/Lambda"
   metric_name               = each.value.metric_name

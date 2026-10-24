@@ -14,7 +14,7 @@ resource "aws_lambda_function" "this" {
   ]
 
   filename           = "lambda_function.zip"
-  function_name      = var.function_name
+  function_name      = "lambda-${var.function_name}"
   role               = aws_iam_role.this.arn
   runtime            = var.runtime
   handler            = local.function_handler
