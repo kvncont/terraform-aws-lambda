@@ -315,3 +315,9 @@ variable "extra_policies" {
   type        = map(string)
   default     = {}
 }
+
+variable "secrets_manager_kms_key_id" {
+  description = "KMS key ID for the Secrets Manager secret"
+  type        = string
+  default     = null
+}
