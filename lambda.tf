@@ -14,7 +14,7 @@ resource "aws_lambda_function" "this" {
   ]
 
   filename           = "lambda_function.zip"
-  function_name      = "lambda-${var.function_name}"
+  function_name      = local.function_name
   role               = aws_iam_role.this.arn
   runtime            = var.runtime
   handler            = local.function_handler
@@ -25,6 +25,11 @@ resource "aws_lambda_function" "this" {
   tags               = var.tags
   source_kms_key_arn = var.source_kms_key_arn
   kms_key_arn        = var.kms_key_arn
+
+  logging_config {
+    log_format = "JSON"
+    log_group  = aws_cloudwatch_log_group.this.name
+  }
 
   dynamic "vpc_config" {
     for_each = var.vpc_config == null ? [] : [var.vpc_config]

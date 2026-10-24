@@ -13,18 +13,27 @@ variable "tags" {
   }
 }
 
-variable "function_name" {
+variable "environment" {
+  description = "Environment for the Lambda function and related resources"
   type        = string
-  description = "Name of the Lambda function"
   validation {
-    condition     = can(regex("^[a-zA-Z0-9_-]{1,64}$", var.function_name))
-    error_message = "function_name must contain 1 to 64 letters, numbers, hyphens, or underscores."
+    condition     = can(regex("^(dev|staging|prod)$", var.environment))
+    error_message = "environment must be one of: dev, staging, prod."
+  }
+}
+
+variable "function_name" {
+  description = "Name of the Lambda function"
+  type        = string
+  validation {
+    condition     = can(regex("^[a-zA-Z0-9_-]{1,58}$", var.function_name))
+    error_message = "function_name must contain 1 to 58 letters, numbers, hyphens, or underscores."
   }
 }
 
 variable "runtime" {
-  type        = string
   description = "Runtime environment for the Lambda function"
+  type        = string
   validation {
     condition     = can(regex("^(python3\\.(10|11|12|13|14)|nodejs(22|24)\\.x)$", var.runtime))
     error_message = "The runtime variable must be one of the following: python3.10, python3.11, python3.12, python3.13, python3.14, nodejs22.x, or nodejs24.x."
