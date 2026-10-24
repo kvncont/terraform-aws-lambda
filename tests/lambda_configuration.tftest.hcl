@@ -21,8 +21,9 @@ variables {
     owner       = "platform-team"
   }
   region        = "us-east-1"
-  function_name = "test-dev"
-  runtime       = "python3.13"
+  function_name = "test"
+  runtime       = "python3.14"
+  environment   = "dev"
 }
 
 run "defaults" {
