@@ -316,6 +316,12 @@ variable "extra_policies" {
   default     = {}
 }
 
+variable "secret_nanager_enabled" {
+  description = "Create Secrets Manager for the Lambda function"
+  type        = bool
+  default     = false
+}
+
 variable "secrets_manager_kms_key_id" {
   description = "KMS key ID for the Secrets Manager secret"
   type        = string
