@@ -316,7 +316,7 @@ variable "extra_policies" {
   default     = {}
 }
 
-variable "secret_nanager_enabled" {
+variable "secret_manager_enabled" {
   description = "Create Secrets Manager for the Lambda function"
   type        = bool
   default     = false
