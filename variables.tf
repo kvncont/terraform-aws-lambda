@@ -26,8 +26,8 @@ variable "function_name" {
   description = "Name of the Lambda function"
   type        = string
   validation {
-    condition     = can(regex("^[a-zA-Z0-9_-]{1,58}$", var.function_name))
-    error_message = "function_name must contain 1 to 58 letters, numbers, hyphens, or underscores."
+    condition     = can(regex("^[a-zA-Z0-9_-]{1,40}$", var.function_name))
+    error_message = "function_name must contain 1 to 40 letters, numbers, hyphens, or underscores."
   }
 }
 
