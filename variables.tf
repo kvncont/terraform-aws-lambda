@@ -17,8 +17,8 @@ variable "environment" {
   description = "Environment for the Lambda function and related resources"
   type        = string
   validation {
-    condition     = can(regex("^(dev|staging|prod)$", var.environment))
-    error_message = "environment must be one of: dev, staging, prod."
+    condition     = can(regex("^(dev|stg|prod)$", var.environment))
+    error_message = "environment must be one of: dev, stg, prod."
   }
 }
 
