@@ -1,7 +1,8 @@
+<!-- BEGIN_TF_DOCS -->
 ## Requirements
 
 | Name | Version |
-| ---- | ------- |
+|------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0 |
 | <a name="requirement_archive"></a> [archive](#requirement\_archive) | ~> 2.0 |
 | <a name="requirement_aws"></a> [aws](#requirement\_aws) | ~> 6.18 |
@@ -9,9 +10,9 @@
 ## Providers
 
 | Name | Version |
-| ---- | ------- |
-| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.8.1 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 6.69.1 |
+|------|---------|
+| <a name="provider_archive"></a> [archive](#provider\_archive) | ~> 2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | ~> 6.18 |
 
 ## Modules
 
@@ -20,7 +21,7 @@ No modules.
 ## Resources
 
 | Name | Type |
-| ---- | ---- |
+|------|------|
 | [aws_cloudwatch_log_group.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_cloudwatch_metric_alarm.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) | resource |
 | [aws_iam_role.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/iam_role) | resource |
@@ -43,7 +44,7 @@ No modules.
 ## Inputs
 
 | Name | Description | Type | Default | Required |
-| ---- | ----------- | ---- | ------- | :------: |
+|------|-------------|------|---------|:--------:|
 | <a name="input_alarm_actions"></a> [alarm\_actions](#input\_alarm\_actions) | Action ARNs (for example SNS topics) notified when a Lambda alarm enters ALARM | `list(string)` | `[]` | no |
 | <a name="input_amazon_msk_event_source_mappings"></a> [amazon\_msk\_event\_source\_mappings](#input\_amazon\_msk\_event\_source\_mappings) | Amazon MSK event source mappings for the Lambda function | <pre>map(object({<br/>    event_source_arn                   = string<br/>    topics                             = set(string)<br/>    batch_size                         = optional(number)<br/>    enabled                            = optional(bool, true)<br/>    maximum_batching_window_in_seconds = optional(number)<br/>    function_response_types            = optional(set(string))<br/>    maximum_record_age_in_seconds      = optional(number)<br/>    maximum_retry_attempts             = optional(number)<br/>    filters = optional(list(object({<br/>      pattern = string<br/>    })), [])<br/>    consumer_group_id = optional(string)<br/>    source_access_configuration = optional(list(object({<br/>      type = string<br/>      uri  = string<br/>    })), [])<br/>  }))</pre> | `{}` | no |
 | <a name="input_cloudwatch_alarms"></a> [cloudwatch\_alarms](#input\_cloudwatch\_alarms) | Complete map of Lambda alarms; replaces the default map. A null Duration threshold uses 80% of timeout in milliseconds | <pre>map(object({<br/>    metric_name               = string<br/>    enabled                   = optional(bool, true)<br/>    threshold                 = optional(number)<br/>    statistic                 = optional(string)<br/>    extended_statistic        = optional(string)<br/>    comparison_operator       = optional(string, "GreaterThanOrEqualToThreshold")<br/>    period                    = optional(number, 300)<br/>    evaluation_periods        = optional(number, 1)<br/>    datapoints_to_alarm       = optional(number)<br/>    treat_missing_data        = optional(string, "notBreaching")<br/>    alarm_actions             = optional(list(string))<br/>    ok_actions                = optional(list(string), [])<br/>    insufficient_data_actions = optional(list(string), [])<br/>  }))</pre> | <pre>{<br/>  "duration": {<br/>    "extended_statistic": "p95",<br/>    "metric_name": "Duration"<br/>  },<br/>  "errors": {<br/>    "metric_name": "Errors",<br/>    "statistic": "Sum",<br/>    "threshold": 1<br/>  },<br/>  "throttles": {<br/>    "metric_name": "Throttles",<br/>    "statistic": "Sum",<br/>    "threshold": 1<br/>  }<br/>}</pre> | no |
@@ -69,10 +70,11 @@ No modules.
 ## Outputs
 
 | Name | Description |
-| ---- | ----------- |
+|------|-------------|
 | <a name="output_cloudwatch_alarm_arns"></a> [cloudwatch\_alarm\_arns](#output\_cloudwatch\_alarm\_arns) | CloudWatch alarm ARNs keyed by errors, throttles, and duration |
 | <a name="output_function_runtime"></a> [function\_runtime](#output\_function\_runtime) | Runtime environment for the Lambda function |
 | <a name="output_function_url"></a> [function\_url](#output\_function\_url) | Lambda function URL |
 | <a name="output_lambda_role_arn"></a> [lambda\_role\_arn](#output\_lambda\_role\_arn) | ARN Role for the Lambda function |
 | <a name="output_lambda_role_name"></a> [lambda\_role\_name](#output\_lambda\_role\_name) | Role name for the Lambda function |
 | <a name="output_security_group_id"></a> [security\_group\_id](#output\_security\_group\_id) | Managed Lambda security group ID, or null when not created |
+<!-- END_TF_DOCS -->
