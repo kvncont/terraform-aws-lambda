@@ -22,7 +22,9 @@ module "lambda" {
   source = "../.."
 
   function_name = "lambda-private-example"
-  runtime       = "python3.13"
+  runtime       = "python3.14"
+  environment   = "dev"
+  tags          = var.tags
 
   vpc_config = {
     vpc_id     = var.vpc_id
@@ -38,6 +40,4 @@ module "lambda" {
       cidr_ipv4   = var.vpc_cidr
     }
   }
-
-  tags = var.tags
 }

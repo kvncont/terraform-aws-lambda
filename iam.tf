@@ -1,6 +1,6 @@
 resource "aws_iam_role" "this" {
-  name_prefix = "${substr(var.function_name, 0, 37)}-"
-  tags        = var.tags
+  name = "iam-role-${local.function_name}"
+  tags = var.tags
   assume_role_policy = jsonencode({
     Version : "2012-10-17"
     Statement : [

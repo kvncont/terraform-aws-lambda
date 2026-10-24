@@ -22,7 +22,8 @@ module "lambda" {
   source = "../.."
 
   function_name = "lambda-public-example"
-  runtime       = "python3.13"
+  runtime       = "python3.14"
+  environment   = "dev"
   tags          = var.tags
 
   # Opt in only after replacing these placeholders with ARNs of approved

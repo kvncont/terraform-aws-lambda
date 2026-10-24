@@ -21,8 +21,9 @@ variables {
     owner       = "platform-team"
   }
   region        = "us-east-1"
-  function_name = "test-dev"
-  runtime       = "python3.13"
+  function_name = "test"
+  runtime       = "python3.14"
+  environment   = "dev"
 }
 
 run "defaults" {
@@ -94,7 +95,7 @@ run "managed_vpc_and_alarms" {
       aws_cloudwatch_metric_alarm.lambda["duration"].threshold == 24000 &&
       aws_cloudwatch_metric_alarm.lambda["duration"].extended_statistic == "p95" &&
       alltrue([for alarm in aws_cloudwatch_metric_alarm.lambda :
-        alarm.dimensions["FunctionName"] == "test-dev" &&
+        alarm.dimensions["FunctionName"] == "lambda-test-dev" &&
         alarm.treat_missing_data == "notBreaching" &&
         contains(alarm.alarm_actions, "arn:aws:sns:us-east-1:123456789012:lambda-alerts")
       ])
