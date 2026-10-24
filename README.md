@@ -36,6 +36,7 @@ No modules.
 | [aws_lambda_function.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function) | resource |
 | [aws_lambda_function_url.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_function_url) | resource |
 | [aws_lambda_permission.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
+| [aws_secretsmanager_secret.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/secretsmanager_secret) | resource |
 | [aws_security_group.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
 | [aws_vpc_security_group_egress_rule.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_egress_rule) | resource |
 | [aws_vpc_security_group_ingress_rule.lambda](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/vpc_security_group_ingress_rule) | resource |
@@ -60,6 +61,7 @@ No modules.
 | <a name="input_memory_size"></a> [memory\_size](#input\_memory\_size) | Lambda memory allocation in MB | `number` | `128` | no |
 | <a name="input_permissions"></a> [permissions](#input\_permissions) | Permissions that allow services or accounts to invoke the Lambda function | <pre>map(object({<br/>    statement_id   = string<br/>    principal      = string<br/>    source_arn     = optional(string)<br/>    source_account = optional(string)<br/>  }))</pre> | `{}` | no |
 | <a name="input_runtime"></a> [runtime](#input\_runtime) | Runtime environment for the Lambda function | `string` | n/a | yes |
+| <a name="input_secrets_manager_kms_key_id"></a> [secrets\_manager\_kms\_key\_id](#input\_secrets\_manager\_kms\_key\_id) | KMS key ID for the Secrets Manager secret | `string` | `null` | no |
 | <a name="input_security_group_egress_rules"></a> [security\_group\_egress\_rules](#input\_security\_group\_egress\_rules) | Outbound rules for the managed security group; no outbound access is allowed by default | <pre>map(object({<br/>    description = optional(string)<br/>    protocol    = string<br/>    from_port   = number<br/>    to_port     = number<br/>    cidr_ipv4   = string<br/>  }))</pre> | `{}` | no |
 | <a name="input_security_group_ingress_rules"></a> [security\_group\_ingress\_rules](#input\_security\_group\_ingress\_rules) | Inbound rules for the managed security group; no inbound access is allowed by default | <pre>map(object({<br/>    description = optional(string)<br/>    protocol    = string<br/>    from_port   = number<br/>    to_port     = number<br/>    cidr_ipv4   = string<br/>  }))</pre> | `{}` | no |
 | <a name="input_source_kms_key_arn"></a> [source\_kms\_key\_arn](#input\_source\_kms\_key\_arn) | Existing customer-managed KMS key ARN for Lambda ZIP code encryption; null uses AWS-owned encryption | `string` | `null` | no |
